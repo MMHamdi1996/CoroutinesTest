@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.coroutinestest.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -13,9 +16,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.operationButton.setOnClickListener {
-            for (i in 0..1000000) {
-                Log.d("Counter", i.toString())
+            CoroutineScope(Dispatchers.Default).launch {
+                for (i in 0..1000000) {
+                    Log.d("Counter", i.toString())
+                }
             }
+
         }
         var number = 0
         binding.addButton.setOnClickListener {
