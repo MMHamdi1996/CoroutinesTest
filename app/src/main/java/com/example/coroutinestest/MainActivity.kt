@@ -18,11 +18,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.operationButton.setOnClickListener {
             CoroutineScope(Dispatchers.Default).launch {
-                withContext(Dispatchers.Main){
-                    for (i in 0..100000000) {
-                        binding.operationButton.text = i.toString()
+                for (i in 0..1000000)
+                    withContext(Dispatchers.Main) {
+                        binding.operationTextView.text = i.toString()
                     }
-                }
 
             }
 
