@@ -7,6 +7,7 @@ import com.example.coroutinestest.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -17,9 +18,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.operationButton.setOnClickListener {
             CoroutineScope(Dispatchers.Default).launch {
-                for (i in 0..1000000) {
-                    Log.d("Counter", i.toString())
+                withContext(Dispatchers.Main){
+                    for (i in 0..100000000) {
+                        binding.operationButton.text = i.toString()
+                    }
                 }
+
             }
 
         }
